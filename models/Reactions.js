@@ -1,9 +1,9 @@
-const { Schema } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 // Schema to create Student model
 const reactionSchema = new Schema(
   {
-    reactionId: { 
+    reactionId: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
     },
@@ -20,14 +20,16 @@ const reactionSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (date) => {
-        if (date) return date.toISOString().split('T')[0];
+        if (date) { return date.toISOString().split('T')[0] };
       }
     },
   },
   {
     toJSON: {
       getters: true,
+      virtuals: true,
     },
+    _id: false,
   }
 );
 

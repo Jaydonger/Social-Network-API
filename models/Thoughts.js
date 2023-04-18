@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const reactionSchema = require('./Reactions');
 
 const thoughtSchema = new Schema(
@@ -6,13 +6,14 @@ const thoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      max_length: 280,
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
       get: (date) => {
-        if (date) return date.toISOString().split('T')[0];
+        if (date) { return date.toISOString().split('T')[0] };
       }
     },
     username: {
@@ -29,7 +30,7 @@ const thoughtSchema = new Schema(
   }
 );
 
-
+// getter function that returns reaction count.
 thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });

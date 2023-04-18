@@ -40,19 +40,11 @@ const userSchema = new Schema(
   }
 );
 
+// virtual getter that retreives friend count.
 userSchema.virtual('friendCount').get(function () {
   return this.friends.length;
 });
 
 const User = model('user', userSchema);
-
-User.find({}).exec((err, collection) => {
-  if (collection.length === 0) {
-    User.create([
-      { username: 'jaytizzle', email: 'jordanpace45@gmail.com'},
-      { username: 'jaydonger', email: 'jaydonger@yahoo.com'},
-    ]);
-  }
-});
 
 module.exports = User;
