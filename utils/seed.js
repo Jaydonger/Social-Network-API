@@ -4,6 +4,7 @@ const { users, thoughts } = require("./data");
 
 connection.on("error", (err) => err);
 
+// cleaning out and inserting seed data!
 connection.once("open", async () => {
     console.log("connected");
 

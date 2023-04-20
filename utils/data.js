@@ -1,3 +1,5 @@
+// Seed data!
+
 const users = [
   { userName: "jaytizzle", email: "jp93@hotmail.com", thoughts: [] },
   { userName: "jaydong", email: "jpace42@yahoo.com", thoughts: [] },
