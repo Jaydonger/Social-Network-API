@@ -15,9 +15,13 @@ connection.once("open", async () => {
     const thoughtDocuments = await Thought.insertMany(thoughts);
     users.forEach((user) => {
         const userThoughts = thoughtDocuments.filter((thought) => {
-            return thought.userName === user.userName;
+            return thought.username === user.username;
         });
-        user.thoughts.push(...userThoughts.map((thought) => thought.id));
+        userThoughts.forEach((thought) => {
+            if(thought.username === user.username) {
+                user.thoughts.push(thought._id);
+            }
+        });
     });
     await User.collection.insertMany(users);
 
